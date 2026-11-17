@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora Lei 14.181/2021 • Defesa do Mínimo Existencial</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+  <!-- Barra Superior -->
+  <header class="border-b border-slate-800/90 bg-slate-900/90 backdrop-blur-md sticky top-0 z-20">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">
+          Lei Federal 14.181/2021
+        </span>
+      </div>
+      <span class="text-xs text-slate-400 font-medium">
+        Defesa do Mínimo Existencial
+      </span>
+    </div>
+  </header>
+
+  <main class="max-w-3xl w-full mx-auto px-4 py-8 sm:py-12 space-y-14">
+
+    <!-- BLOCO 1: DOBRA PRINCIPAL -->
+    <section class="space-y-4 text-center">
+      <div class="inline-block bg-emerald-500/10 border border-emerald-500/30 rounded-full px-3.5 py-1">
+        <span class="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-emerald-300">
+          Lei Federal 14.181/2021 • Defesa do Mínimo Existencial
+        </span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+        Os empréstimos consignados, cartões e débitos em conta estão tomando mais de 30% do seu salário?
+      </h1>
+
+      <p class="text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        Use a calculadora gratuita abaixo para descobrir em 15 segundos quanto da sua renda mensal está protegida pela
+        <strong class="text-white">Lei do Superendividamento</strong> e qual deveria ser o limite máximo das suas parcelas para preservar o sustento da sua família.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 pt-1 text-xs sm:text-sm text-emerald-400 font-medium">
+        <span>✓ 100% Gratuito</span>
+        <span>✓ Não pede CPF, e-mail nem senha</span>
+        <span>✓ Cálculo imediato na tela</span>
+      </div>
+    </section>
+
+    <!-- BLOCO 2: A CALCULADORA INTERATIVA -->
+    <section id="calculadora" class="scroll-mt-20 space-y-6">
+      <form id="formCalculadora" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-8 shadow-2xl space-y-5">
+        <div class="border-b border-slate-800 pb-3">
+          <h2 class="text-lg sm:text-xl font-bold text-white">
+            Simulador Oficial de Mínimo Existencial
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">
+            Preencha os 4 campos abaixo com valores aproximados do seu mês.
+          </p>
+        </div>
+
+        <div>
+          <label for="perfil" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+            1. Qual é a sua fonte de renda principal?
+          </label>
+          <select id="perfil" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3.5 text-white text-sm sm:text-base focus:outline-none focus:border-emerald-500 transition">
+            <option value="Servidor Público">Servidor Público (Estadual / Municipal / Federal)</option>
+            <option value="Aposentado / Pensionista INSS">Aposentado ou Pensionista (INSS / RPPS)</option>
+            <option value="Trabalhador CLT">Trabalhador Assalariado (CLT)</option>
+            <option value="Autônomo / Outros">Autônomo / Profissional Liberal</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="renda" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+            2. Sua Renda Líquida Mensal (antes dos empréstimos)
+          </label>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold">R$</span>
+            <input id="renda" type="text" inputmode="numeric" required placeholder="4.500,00"
+              class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-11 pr-4 py-3.5 text-white text-lg font-semibold focus:outline-none focus:border-emerald-500 transition" />
+          </div>
+        </div>
+
+        <div>
+          <label for="parcelas" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+            3. Soma mensal de TODAS as parcelas de dívidas
+          </label>
+          <p class="text-xs text-slate-400 mb-1.5">
+            Inclua consignados em folha, empréstimos pessoais, cartão consignado (RMC/RCC) e débitos em conta.
+          </p>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold">R$</span>
+            <input id="parcelas" type="text" inputmode="numeric" required placeholder="2.750,00"
+              class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-11 pr-4 py-3.5 text-white text-lg font-semibold focus:outline-none focus:border-emerald-500 transition" />
+          </div>
+        </div>
+
+        <div>
+          <label for="despesas" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+            4. Despesas básicas mensais da sua família
+          </label>
+          <p class="text-xs text-slate-400 mb-1.5">
+            Aluguel/moradia, água, luz, supermercado, remédios, educação e transporte.
+          </p>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold">R$</span>
+            <input id="despesas" type="text" inputmode="numeric" required placeholder="2.400,00"
+              class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-11 pr-4 py-3.5 text-white text-lg font-semibold focus:outline-none focus:border-emerald-500 transition" />
+          </div>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm sm:text-base py-4 rounded-xl shadow-lg shadow-emerald-500/20 transition cursor-pointer">
+          CALCULAR MEU MÍNIMO EXISTENCIAL AGORA
+        </button>
+      </form>
+
+      <!-- CARD DE RESULTADO (OCULTO ATÉ CALCULAR) -->
+      <div id="resultadoBox" class="hidden bg-slate-900 border-2 border-emerald-500/70 rounded-2xl p-5 sm:p-8 space-y-6 shadow-2xl">
+        <div class="border-b border-slate-800 pb-4">
+          <span id="badgeAlerta" class="inline-block text-xs font-bold uppercase px-3 py-1 rounded-md mb-2"></span>
+          <h3 id="tituloComprometimento" class="text-xl sm:text-2xl font-extrabold text-white"></h3>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-slate-950 border border-red-500/30 rounded-xl p-4">
+            <p class="text-xs text-slate-400 uppercase font-bold">Quanto você paga hoje</p>
+            <p class="text-2xl sm:text-3xl font-extrabold text-red-400 mt-1">
+              <span id="valorParcelasHoje"></span><span class="text-xs font-normal text-slate-400">/mês</span>
+            </p>
+            <p class="text-xs text-slate-400 mt-1.5">
+              Saldo após contas básicas: <span id="valorSaldoAtual"></span>
+            </p>
+          </div>
+
+          <div class="bg-slate-950 border border-emerald-500/40 rounded-xl p-4">
+            <p class="text-xs text-slate-400 uppercase font-bold">Teto estimado (Lei 14.181)</p>
+            <p class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">
+              <span id="valorTetoPlano"></span><span class="text-xs font-normal text-slate-400">/mês</span>
+            </p>
+            <p class="text-xs text-slate-300 mt-1.5">
+              Carência legal de até <strong>180 dias</strong> para 1ª parcela
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-5 text-center space-y-1">
+          <p class="text-xs uppercase tracking-wider font-bold text-emerald-300">
+            Alívio Financeiro Estimado no Seu Orçamento
+          </p>
+          <p id="valorAlivioMensal" class="text-3xl sm:text-4xl font-black text-emerald-400"></p>
+          <p class="text-xs sm:text-sm text-slate-200">
+            Equivalente a <strong id="valorAlivioAnual"></strong> preservados em 12 meses para o sustento da sua família.
+          </p>
+        </div>
+
+        <div class="space-y-2.5 pt-1">
+          <a id="btnWhatsApp" href="#" target="_blank" rel="noopener noreferrer"
+            class="block w-full text-center bg-green-500 hover:bg-green-400 text-slate-950 font-extrabold text-sm sm:text-base py-4 px-6 rounded-xl shadow-lg shadow-green-500/20 transition">
+            ENVIAR RESULTADO E ANALISAR MEU PLANO NO WHATSAPP →
+          </a>
+          <p class="text-[11px] text-center text-slate-400">
+            Atendimento sigiloso • Análise individual baseada no Art. 104-A do Código de Defesa do Consumidor
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCO 3: O QUE DIZ A LEI -->
+    <section class="space-y-6 border-t border-slate-800/80 pt-10">
+      <div class="space-y-3">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white">
+          Por que os bancos não te contam sobre o Art. 104-A do Código de Defesa do Consumidor?
+        </h2>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          Quando você contrata vários empréstimos consignados, empréstimos pessoais e cartões consignados (RMC/RCC), cada banco olha apenas para o próprio contrato — e a soma das parcelas acaba engolindo o seu salário inteiro. A
+          <strong class="text-white">Lei 14.181/2021</strong> foi criada exatamente para interromper esse ciclo e impedir que o pagamento de dívidas destrua a dignidade e a subsistência do consumidor de boa-fé.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">01. Proteção Salarial</span>
+          <h3 class="text-base font-bold text-white">Preservação do Mínimo Existencial</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            Antes de pagar qualquer banco, a lei garante que você tenha recursos suficientes para moradia, alimentação, energia, água, saúde e transporte.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">02. Mesa Única</span>
+          <h3 class="text-base font-bold text-white">Plano Global de Pagamento</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            Todos os credores são reunidos em um único plano judicial de repactuação, com prazo de até <strong class="text-slate-200">5 anos (60 meses)</strong> ajustado à sua real capacidade financeira.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">03. Fôlego Imediato</span>
+          <h3 class="text-base font-bold text-white">Carência Legal de até 180 Dias</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            A lei permite solicitar carência de até <strong class="text-slate-200">6 meses</strong> para o início do pagamento da primeira parcela, dando fôlego imediato para reorganizar sua casa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCO 4: PARA QUEM É -->
+    <section class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-5">
+      <h2 class="text-xl sm:text-2xl font-extrabold text-white">
+        Quem pode se beneficiar da análise da Lei do Superendividamento?
+      </h2>
+
+      <ul class="space-y-4 text-sm sm:text-base text-slate-300">
+        <li class="flex items-start gap-3">
+          <span class="text-emerald-400 font-bold mt-0.5">✓</span>
+          <div>
+            <strong class="text-white">Servidores Públicos (Estaduais, Municipais e Federais):</strong>
+            Professores, profissionais da saúde, policiais e servidores administrativos com margem comprometida por consignados e cartões RMC/RCC.
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-emerald-400 font-bold mt-0.5">✓</span>
+          <div>
+            <strong class="text-white">Aposentados e Pensionistas (INSS / RPPS):</strong>
+            Beneficiários que sofrem descontos sucessivos na folha e ficaram sem renda líquida para custear remédios e despesas básicas.
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-emerald-400 font-bold mt-0.5">✓</span>
+          <div>
+            <strong class="text-white">Trabalhadores Assalariados (CLT) e Autônomos:</strong>
+            Consumidores de boa-fé que acumularam empréstimos pessoais, CDC, cheque especial e cartões de crédito acima da capacidade de pagamento.
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- BLOCO 5: PERGUNTAS FREQUENTES -->
+    <section class="space-y-5">
+      <h2 class="text-xl sm:text-2xl font-extrabold text-white">
+        Dúvidas Comuns Sobre o Cálculo e a Lei 14.181/2021
+      </h2>
+
+      <div class="space-y-3">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-1.5">
+          <h3 class="text-sm sm:text-base font-bold text-white">
+            1. O meu contracheque já vem com desconto direto na folha. A lei funciona mesmo assim?
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <strong>Sim.</strong> A jurisprudência atual aplica a Lei 14.181/2021 inclusive para servidores públicos e aposentados com descontos em folha e em conta-corrente, permitindo requerer judicialmente a limitação das retenções ao teto que preserva o mínimo existencial.
+          </p>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-1.5">
+          <h3 class="text-sm sm:text-base font-bold text-white">
+            2. Preciso ficar inadimplente ou sujar meu nome para usar a lei?
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <strong>Não.</strong> A lei protege tanto quem já está em atraso quanto quem ainda está pagando em dia às custas de deixar faltar comida, aluguel ou luz dentro de casa.
+          </p>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-1.5">
+          <h3 class="text-sm sm:text-base font-bold text-white">
+            3. Quais documentos preciso ter em mãos para uma análise real?
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Apenas o seu <strong>último contracheque (ou extrato do INSS)</strong> e o <strong>extrato dos empréstimos ativos</strong> (no aplicativo do banco ou no Registrato do Banco Central).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCO 6: AUTORIDADE TÉCNICA -->
+    <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 space-y-2">
+      <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">
+        Responsável Técnico pela Ferramenta
+      </span>
+      <h2 class="text-lg sm:text-xl font-bold text-white">
+        Dr. Reginaldo Oliveira — Advogado (OAB/SC 57.879)
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+        Atuação especializada em Direito Bancário, Defesa do Consumidor Superendividado e Estruturação de Planos Globais de Repactuação de Dívidas (Lei 14.181/2021), com atendimento digital para servidores públicos, aposentados e trabalhadores em todo o Brasil.
+      </p>
+    </section>
+
+    <!-- BLOCO 7: CHAMADA FINAL -->
+    <section class="bg-gradient-to-br from-emerald-950/60 to-slate-900 border border-emerald-500/40 rounded-2xl p-6 sm:p-8 text-center space-y-4">
+      <h2 class="text-xl sm:text-2xl font-extrabold text-white">
+        Não deixe mais um mês do seu salário desaparecer antes mesmo de cair na conta.
+      </h2>
+      <p class="text-sm sm:text-base text-slate-300 max-w-xl mx-auto">
+        Faça a simulação gratuita agora mesmo e envie o resultado para receber uma avaliação técnica individual do seu caso.
+      </p>
+      <a href="#calculadora"
+        class="inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm sm:text-base py-4 px-8 rounded-xl shadow-lg shadow-emerald-500/20 transition">
+        FAZER MINHA SIMULAÇÃO GRATUITA AGORA ↑
+      </a>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ ÉTICO OAB -->
+  <footer class="border-t border-slate-800/80 bg-slate-950 py-8 px-4 text-center text-xs text-slate-500 space-y-1.5">
+    <p class="text-slate-300 font-semibold">
+      Dr. Reginaldo Oliveira • Advocacia Estratégica em Direito Bancário e Superendividamento (OAB/SC 57.879)
+    </p>
+    <p class="max-w-2xl mx-auto leading-relaxed">
+      Ferramenta de caráter exclusivamente informativo e educacional, em estrita conformidade com o Provimento 205/2021 da OAB. Os valores exibidos são estimativas matemáticas sujeitas à análise documental e homologação judicial.
+    </p>
+  </footer>
+
+  <script>
+    const WHATSAPP_NUMBER = "5571983008001";
+
+    function formatBRL(value) {
+      return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    }
+
+    function parseBRL(raw) {
+      const digits = raw.replace(/\D/g, "");
+      return digits ? parseInt(digits, 10) / 100 : 0;
+    }
+
+    function maskInput(input) {
+      const num = parseBRL(input.value);
+      input.value = num === 0 ? "" : num.toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+      document.getElementById("resultadoBox").classList.add("hidden");
+    }
+
+    ["renda", "parcelas", "despesas"].forEach(id => {
+      document.getElementById(id).addEventListener("input", function () {
+        maskInput(this);
+      });
+    });
+
+    document.getElementById("perfil").addEventListener("change", function () {
+      document.getElementById("resultadoBox").classList.add("hidden");
+    });
+
+    document.getElementById("formCalculadora").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const perfil = document.getElementById("perfil").value;
+      const renda = parseBRL(document.getElementById("renda").value);
+      const parcelas = parseBRL(document.getElementById("parcelas").value);
+      const despesas = parseBRL(document.getElementById("despesas").value);
+
+      if (renda <= 0 || parcelas <= 0) return;
+
+      const comprometimentoPct = (parcelas / renda) * 100;
+      const saldoAtual = renda - parcelas - despesas;
+
+      const teto30 = renda * 0.30;
+      const margemAposBasico = Math.max(0, renda - despesas);
+      const parcelaSugerida = Math.min(teto30, margemAposBasico);
+      const alivioMensal = Math.max(0, parcelas - parcelaSugerida);
+      const alivioAnual = alivioMensal * 12;
+
+      const enquadrado = comprometimentoPct > 30 || saldoAtual < 0;
+
+      const badge = document.getElementById("badgeAlerta");
+      if (enquadrado) {
+        badge.textContent = "ALERTA: COMPROMETIMENTO EXCESSIVO DETECTADO";
+        badge.className = "inline-block text-xs font-bold uppercase px-3 py-1 rounded-md mb-2 bg-red-500/20 text-red-400 border border-red-500/30";
+      } else {
+        badge.textContent = "ANÁLISE DE CAPACIDADE DE PAGAMENTO";
+        badge.className = "inline-block text-xs font-bold uppercase px-3 py-1 rounded-md mb-2 bg-amber-500/20 text-amber-300 border border-amber-500/30";
+      }
+
+      document.getElementById("tituloComprometimento").textContent =
+        `${comprometimentoPct.toFixed(1)}% da sua renda está presa com bancos`;
+
+      document.getElementById("valorParcelasHoje").textContent = formatBRL(parcelas);
+
+      const saldoEl = document.getElementById("valorSaldoAtual");
+      saldoEl.textContent = formatBRL(saldoAtual);
+      saldoEl.className = saldoAtual < 0 ? "text-red-400 font-bold" : "text-slate-200 font-semibold";
+
+      document.getElementById("valorTetoPlano").textContent = formatBRL(parcelaSugerida);
+      document.getElementById("valorAlivioMensal").textContent = `+ ${formatBRL(alivioMensal)} / mês`;
+      document.getElementById("valorAlivioAnual").textContent = formatBRL(alivioAnual);
+
+      const msg = `Olá Dr. Reginaldo! Fiz a simulação na Calculadora da Lei 14.181/2021 e gostaria de uma análise do meu caso:
+
+• *Perfil:* ${perfil}
+• *Renda Líquida:* ${formatBRL(renda)}
+• *Total de Parcelas/Mês:* ${formatBRL(parcelas)} (${comprometimentoPct.toFixed(1)}% da renda)
+• *Despesas Básicas:* ${formatBRL(despesas)}
+• *Alívio Mensal Estimado:* ${formatBRL(alivioMensal)}/mês
+
+Como funciona o Plano Global de Pagamento para proteger meu mínimo existencial?`;
+
+      document.getElementById("btnWhatsApp").href =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+      const box = document.getElementById("resultadoBox");
+      box.classList.remove("hidden");
+      box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  </script>
+</body>
+</html>
